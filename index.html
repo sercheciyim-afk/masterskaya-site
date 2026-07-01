@@ -1,5 +1,503 @@
 <!doctype html>
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=./%D0%9C%D0%B0%D1%81%D1%82%D0%B5%D1%80%D1%81%D0%BA%D0%B0%D1%8F%20-%20%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%20upload.html">
-<title>Мастерская</title>
-<a href="./%D0%9C%D0%B0%D1%81%D1%82%D0%B5%D1%80%D1%81%D0%BA%D0%B0%D1%8F%20-%20%D0%BB%D0%B5%D0%BD%D0%B4%D0%B8%D0%BD%D0%B3%20upload.html">Открыть сайт</a>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Мастерская твоего первого сайта</title>
+  <meta name="description" content="Пять дней до первого опубликованного сайта и навыка, за который платят.">
+  <style>
+    @font-face{font-family:'ST Brigantina';src:url('assets/fonts/ST-Brigantina-free.otf') format('opentype');font-weight:400;font-display:swap;}
+
+    :root{
+      --bordo-deep:#1d0201;
+      --bordo:#3a0f0b;
+      --bordo-velvet:#5a1a18;
+      --black:#0c0908;
+      --moloko:#ece3d2;
+      --milk-soft:rgba(236,227,210,.78);
+      --milk-muted:rgba(236,227,210,.62);
+      --grid:minmax(20px,1fr) repeat(12,minmax(0,78px)) minmax(20px,1fr);
+      --gap:24px;
+      --section:clamp(88px,11vw,160px);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--black)}
+    body{
+      margin:0;
+      color:var(--moloko);
+      font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      font-size:clamp(16px,1.1vw,19px);
+      line-height:1.62;
+      background:var(--bordo-deep);
+      text-rendering:optimizeLegibility;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      background:var(--bordo-deep) url('assets/fon.jpg') center/cover fixed;
+    }
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background:rgba(12,9,8,.34);
+    }
+    a{color:inherit}
+    img,video{max-width:100%}
+    p,h1,h2,h3{margin:0;text-wrap:pretty}
+    h1,h2{text-wrap:balance}
+
+    .hero{
+      position:relative;
+      min-height:100vh;
+      min-height:100svh;
+      display:grid;
+      grid-template-columns:var(--grid);
+      place-items:center;
+      overflow:hidden;
+      background:var(--bordo-deep);
+      isolation:isolate;
+    }
+    .hero-media,.hero-fallback{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .hero-media{z-index:-4;filter:saturate(.8) brightness(.64)}
+    .hero-fallback{z-index:-5;filter:saturate(.8) brightness(.62)}
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      background:
+        linear-gradient(180deg,rgba(29,2,1,.08),rgba(29,2,1,.32) 44%,rgba(12,9,8,.76)),
+        rgba(29,2,1,.2);
+    }
+    .paper-rain{
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      overflow:hidden;
+      pointer-events:none;
+    }
+    .paper-rain span{
+      position:absolute;
+      top:-18vh;
+      left:var(--x);
+      width:clamp(34px,5vw,72px);
+      aspect-ratio:.72;
+      background:
+        linear-gradient(140deg,rgba(236,227,210,.92),rgba(202,191,168,.72)),
+        repeating-linear-gradient(0deg,transparent 0 12px,rgba(29,2,1,.12) 13px 14px);
+      opacity:.22;
+      transform:rotate(var(--r));
+      animation:paperFall var(--d) linear infinite;
+      animation-delay:var(--delay);
+      filter:blur(.2px);
+    }
+    @keyframes paperFall{
+      0%{translate:0 -18vh;rotate:0deg}
+      50%{translate:var(--drift) 55vh;rotate:170deg}
+      100%{translate:calc(var(--drift) * -1) 122vh;rotate:340deg}
+    }
+    .hero-inner{
+      grid-column:3 / span 10;
+      width:100%;
+      max-width:980px;
+      text-align:center;
+      padding:clamp(64px,10vh,120px) 0;
+    }
+    .eyebrow,.kicker{
+      display:block;
+      color:var(--moloko);
+      font-size:12px;
+      line-height:1.2;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      opacity:.74;
+    }
+    .eyebrow{margin:0 0 22px}
+    h1,h2{
+      font-family:'ST Brigantina',Georgia,serif;
+      color:var(--moloko);
+      font-weight:400;
+      letter-spacing:0;
+    }
+    h1{
+      font-size:clamp(58px,9vw,138px);
+      line-height:.92;
+    }
+    h2{
+      max-width:960px;
+      margin:16px auto 0;
+      font-size:clamp(44px,6.2vw,96px);
+      line-height:.96;
+      text-align:center;
+    }
+    h3{
+      font:500 clamp(21px,1.65vw,28px)/1.18 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--moloko);
+      text-wrap:balance;
+    }
+    .hero-copy{
+      max-width:720px;
+      margin:30px auto 0;
+      color:var(--moloko);
+      font-size:clamp(18px,1.55vw,25px);
+      line-height:1.48;
+    }
+
+    main{background:transparent}
+    .section{
+      display:grid;
+      grid-template-columns:var(--grid);
+      column-gap:var(--gap);
+      padding-block:var(--section);
+      position:relative;
+    }
+    .wide{grid-column:2 / span 12}
+    .narrow{grid-column:3 / span 8;text-align:center}
+    .manifest{
+      max-width:970px;
+      margin-inline:auto;
+      color:var(--moloko);
+      font-size:clamp(25px,3vw,48px);
+      line-height:1.22;
+    }
+    .manifest + .manifest{margin-top:32px;color:var(--milk-soft)}
+
+    .audience-grid{
+      grid-column:2 / span 12;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:56px;
+    }
+    .audience-card{
+      position:relative;
+      min-height:78vh;
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+      isolation:isolate;
+      background:var(--black);
+    }
+    .audience-card img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      z-index:-2;
+      filter:saturate(.82) brightness(.62);
+      transition:transform .8s ease,filter .8s ease;
+    }
+    .audience-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:linear-gradient(180deg,rgba(12,9,8,.05),rgba(12,9,8,.18) 42%,rgba(12,9,8,.84));
+    }
+    .audience-card:hover img{transform:scale(1.025);filter:saturate(.9) brightness(.68)}
+    .audience-copy{
+      width:100%;
+      padding:clamp(22px,3vw,38px);
+      color:var(--moloko);
+    }
+    .audience-copy h3{margin-top:14px}
+    .audience-copy p{
+      max-width:42ch;
+      margin-top:14px;
+      color:var(--milk-soft);
+      font-size:15px;
+      line-height:1.55;
+    }
+
+    .days-title{grid-column:2 / span 12;text-align:center}
+    .days-layout{
+      grid-column:2 / span 12;
+      display:grid;
+      grid-template-columns:5fr 6fr;
+      gap:clamp(28px,5vw,72px);
+      align-items:center;
+      margin-top:56px;
+    }
+    .days-media img,.about-media img{
+      display:block;
+      width:100%;
+      height:auto;
+      object-fit:cover;
+      filter:drop-shadow(0 20px 36px rgba(0,0,0,.44));
+    }
+    .days-list{
+      display:grid;
+      gap:22px;
+    }
+    .day{
+      display:grid;
+      grid-template-columns:48px minmax(0,1fr);
+      gap:18px;
+      align-items:start;
+    }
+    .day-num{
+      color:var(--moloko);
+      font-size:14px;
+      line-height:1;
+      opacity:.68;
+      padding-top:6px;
+    }
+    .day p{margin-top:6px;color:var(--milk-soft)}
+    .outcomes{
+      margin-top:34px;
+      color:var(--moloko);
+    }
+    .outcomes h3{margin-bottom:18px}
+    .outcomes ul{margin:0;padding:0;list-style:none;color:var(--milk-soft)}
+    .outcomes li + li{margin-top:12px}
+
+    .split{
+      grid-column:2 / span 12;
+      display:grid;
+      grid-template-columns:repeat(12,minmax(0,1fr));
+      gap:var(--gap);
+      align-items:center;
+    }
+    .about-media{grid-column:1 / span 6}
+    .about-copy{grid-column:8 / span 5;text-align:center}
+    .about-copy p{
+      max-width:560px;
+      margin:28px auto 0;
+      color:var(--milk-soft);
+      font-size:clamp(20px,2vw,32px);
+      line-height:1.35;
+    }
+    .offer{
+      grid-column:4 / span 8;
+      text-align:center;
+      padding:clamp(16px,3vw,36px) 0;
+    }
+    .offer-text{
+      max-width:600px;
+      margin:30px auto 0;
+      color:var(--moloko);
+      font-size:clamp(22px,2.1vw,34px);
+      line-height:1.3;
+    }
+    .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:34px}
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      padding:14px 22px 13px;
+      border:1px solid rgba(236,227,210,.5);
+      border-radius:3px;
+      color:var(--moloko);
+      background:rgba(236,227,210,.08);
+      font-size:16px;
+      line-height:1.1;
+      text-decoration:none;
+      transition:background-color .25s ease,transform .25s ease;
+    }
+    .button:hover{transform:translateY(-1px);background:rgba(236,227,210,.14)}
+    .button:focus-visible{outline:2px solid var(--moloko);outline-offset:4px}
+
+    .reveal{
+      opacity:0;
+      transform:translateY(22px);
+      transition:opacity .65s ease,transform .65s ease;
+    }
+    .reveal.is-visible{opacity:1;transform:translateY(0)}
+
+    @media (max-width:900px){
+      :root{--grid:minmax(18px,1fr) repeat(4,minmax(0,1fr)) minmax(18px,1fr);--gap:18px;--section:84px}
+      body{font-size:16px}
+      body::before{background-attachment:scroll}
+      .hero-inner,.wide,.narrow,.audience-grid,.days-title,.days-layout,.split,.offer{grid-column:2 / span 4}
+      h1{font-size:clamp(46px,14vw,68px)}
+      h2{font-size:clamp(42px,13vw,64px)}
+      .hero-copy{font-size:18px}
+      .audience-grid{grid-template-columns:1fr;gap:18px;margin-top:40px}
+      .audience-card{min-height:82svh}
+      .audience-copy p{font-size:14px}
+      .days-layout{grid-template-columns:1fr;margin-top:32px}
+      .days-media{order:-1}
+      .day{grid-template-columns:36px minmax(0,1fr);gap:14px}
+      .split{grid-template-columns:1fr}
+      .about-media,.about-copy{grid-column:auto}
+      .offer{grid-column:2 / span 4}
+      .actions{width:100%}
+      .button{width:100%;min-height:54px}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .paper-rain span{animation:none}
+      .reveal{opacity:1;transform:none;transition:none}
+      .button,.audience-card img{transition:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <picture>
+      <source media="(max-width: 767px)" srcset="assets/hero_mob_poster.png">
+      <img class="hero-fallback" src="assets/hero_komp_poster.png" alt="">
+    </picture>
+    <video class="hero-media" autoplay muted loop playsinline poster="assets/hero_komp_poster.png" aria-hidden="true">
+      <source src="assets/glavnaya_mob.mov" media="(max-width: 767px)" type="video/quicktime">
+      <source src="assets/glavnaya_komp.mov" type="video/quicktime">
+    </video>
+    <div class="paper-rain" aria-hidden="true">
+      <span style="--x:8%;--r:-14deg;--d:15s;--delay:-2s;--drift:34px"></span>
+      <span style="--x:18%;--r:10deg;--d:18s;--delay:-9s;--drift:-46px"></span>
+      <span style="--x:31%;--r:22deg;--d:16s;--delay:-5s;--drift:62px"></span>
+      <span style="--x:47%;--r:-8deg;--d:20s;--delay:-12s;--drift:-32px"></span>
+      <span style="--x:63%;--r:16deg;--d:17s;--delay:-7s;--drift:50px"></span>
+      <span style="--x:78%;--r:-20deg;--d:19s;--delay:-4s;--drift:-58px"></span>
+      <span style="--x:90%;--r:7deg;--d:21s;--delay:-13s;--drift:28px"></span>
+    </div>
+    <div class="hero-inner reveal is-visible">
+      <span class="eyebrow">пятидневная мастерская</span>
+      <h1>Мастерская твоего первого сайта</h1>
+      <p class="hero-copy">Пять дней&nbsp;&mdash; и&nbsp;у&nbsp;тебя навык, за&nbsp;который платят. Свой первый настоящий сайт&nbsp;&mdash; опубликованный, с&nbsp;которого начинается профессия.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="narrow reveal">
+        <p class="manifest">Сайт начинается не&nbsp;с&nbsp;картинки, а&nbsp;с&nbsp;вопроса: что я&nbsp;хочу сказать и&nbsp;кому. И&nbsp;когда смысл есть&nbsp;&mdash; страница оживает: начинает вести человека, а&nbsp;не&nbsp;просто красиво лежать.</p>
+        <p class="manifest">Эти пять дней&nbsp;&mdash; про это. Ты&nbsp;пройдёшь весь путь, от&nbsp;первой мысли до&nbsp;живого сайта, который можно продать.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wide reveal">
+        <span class="kicker">для кого это</span>
+        <h2>Три входа в&nbsp;мастерскую</h2>
+      </div>
+      <div class="audience-grid">
+        <article class="audience-card reveal">
+          <img src="assets/odin.PNG" alt="Старинные книги и часы в темной мастерской">
+          <div class="audience-copy">
+            <span class="kicker">один</span>
+            <h3>Если ты&nbsp;только подходишь к&nbsp;профессии.</h3>
+            <p>Давно смотришь в&nbsp;сторону веб-дизайна, но&nbsp;не&nbsp;знаешь, с&nbsp;какого края взяться. Здесь за&nbsp;короткий срок ты&nbsp;поймёшь не&nbsp;только как создать свой первый сайт, но&nbsp;и&nbsp;продать.</p>
+          </div>
+        </article>
+        <article class="audience-card reveal">
+          <img src="assets/dva.PNG" alt="Открытый блокнот с набросками сайта в мастерской">
+          <div class="audience-copy">
+            <span class="kicker">два</span>
+            <h3>Если у&nbsp;тебя своё дело или бренд.</h3>
+            <p>Есть товар, услуга, имя, а&nbsp;сайта нет или он&nbsp;устарел. Ты&nbsp;сделаешь свой. Не&nbsp;закажешь и&nbsp;будешь ждать, а&nbsp;соберёшь сама&nbsp;&mdash; так, чтобы он&nbsp;говорил твоим голосом.</p>
+          </div>
+        </article>
+        <article class="audience-card reveal">
+          <img src="assets/tri.PNG" alt="Руки вышивают макет сайта на ткани у окна">
+          <div class="audience-copy">
+            <span class="kicker">три</span>
+            <h3>Если ты&nbsp;уже дизайнер.</h3>
+            <p>И&nbsp;чувствуешь, что пора освоить новые инструменты, ускориться и&nbsp;брать больше&nbsp;&mdash; за&nbsp;то&nbsp;же время. Здесь ты&nbsp;возьмёшь их&nbsp;в&nbsp;руки и&nbsp;встроишь в&nbsp;свою работу.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="days-title reveal">
+        <span class="kicker">как пройдут пять дней</span>
+        <h2>Пять дней, сложенных в&nbsp;систему</h2>
+      </div>
+      <div class="days-layout">
+        <div class="days-media reveal">
+          <img src="assets/5_dney.PNG" alt="Стопка напечатанных сайтов на столе мастерской">
+        </div>
+        <div class="days-copy">
+          <div class="days-list">
+            <article class="day reveal">
+              <span class="day-num">01</span>
+              <div><h3>Смысл.</h3><p>Намерение, для&nbsp;кого и&nbsp;зачем этот сайт.</p></div>
+            </article>
+            <article class="day reveal">
+              <span class="day-num">02</span>
+              <div><h3>Структура.</h3><p>Собираем каркас, который ведёт человека к&nbsp;действию.</p></div>
+            </article>
+            <article class="day reveal">
+              <span class="day-num">03</span>
+              <div><h3>Сборка.</h3><p>Блоки, тексты&nbsp;&mdash; с&nbsp;разбором смыслов каждого.</p></div>
+            </article>
+            <article class="day reveal">
+              <span class="day-num">04</span>
+              <div><h3>Доводка и&nbsp;публикация.</h3><p>Сайт выходит в&nbsp;жизнь.</p></div>
+            </article>
+            <article class="day reveal">
+              <span class="day-num">05</span>
+              <div><h3>Упаковка и&nbsp;продажа.</h3><p>Превращаем сайт в&nbsp;предложение и&nbsp;делаем первый заход к&nbsp;заказу.</p></div>
+            </article>
+          </div>
+          <div class="outcomes reveal">
+            <h3>К&nbsp;концу у&nbsp;тебя будет:</h3>
+            <ul>
+              <li>опубликованный сайт&nbsp;&mdash; твоя визитка или для&nbsp;клиента</li>
+              <li>упаковка: своя услуга или готовое предложение, которое можно продать</li>
+              <li>сертификат&nbsp;&mdash; первый шаг в&nbsp;продажу и&nbsp;понимание, как взять первый заказ</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="split">
+        <div class="about-media reveal">
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/kto_ya_mob.PNG">
+            <img src="assets/kto_ya_komp.PNG" alt="Женщина в бордовом платке у окна с видом на море">
+          </picture>
+        </div>
+        <div class="about-copy reveal">
+          <span class="kicker">кто я</span>
+          <h2>Amatullah</h2>
+          <p>Меня зовут Amatullah. 6&nbsp;лет помогаю бизнесам и&nbsp;брендам продавать дорого через сайты и&nbsp;дизайн. Со&nbsp;мной сделали +30&nbsp;млн&nbsp;₽. Обучаю веб-дизайну по&nbsp;авторской методике.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="offer reveal">
+        <span class="kicker">как участвовать</span>
+        <h2>Для первых 35&nbsp;человек&nbsp;&mdash; 2500&nbsp;₽.</h2>
+        <p class="offer-text">Дальше&nbsp;&mdash; 5000&nbsp;₽.<br>18&nbsp;мест уже занято.</p>
+        <div class="actions">
+          <a class="button" href="https://monecle.com/buy/97336" target="_blank" rel="noopener">Занять место&nbsp;&mdash; 2500&nbsp;₽</a>
+          <a class="button" href="https://t.me/Kami_design" target="_blank" rel="noopener">Задать вопрос</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal:not(.is-visible)');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach((node) => observer.observe(node));
+  </script>
+</body>
+</html>
